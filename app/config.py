@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # Service configuration
-    service_name: str = "data-connector"
+    service_name: str = Field(alias="SERVICE_NAME")
     port: int = Field(alias="REPO_DATA_CON_PORT")
     host: str = Field(alias="HOST")
     debug: bool = Field(alias="DEBUG")
@@ -25,12 +25,12 @@ class Settings(BaseSettings):
 
     # Downstream service URLs
     repo_uni_proc_url: str = Field(validation_alias=AliasChoices("REPO_UNI_PROC_URL", "UNIFIED_PROCESSOR_URL"))
-    repo_uni_proc_timeout_secs: int = Field(validation_alias=AliasChoices("REPO_UNI_PROC_TIMEOUT_SECS", "UNIFIED_PROCESSOR_TIMEOUT_SECS"), default=180)
-    repo_uni_proc_retry_attempts: int = Field(validation_alias=AliasChoices("REPO_UNI_PROC_RETRY_ATTEMPTS", "UNIFIED_PROCESSOR_RETRY_ATTEMPTS"), default=3)
+    repo_uni_proc_timeout_secs: int = Field(validation_alias=AliasChoices("REPO_UNI_PROC_TIMEOUT_SECS", "UNIFIED_PROCESSOR_TIMEOUT_SECS"))
+    repo_uni_proc_retry_attempts: int = Field(validation_alias=AliasChoices("REPO_UNI_PROC_RETRY_ATTEMPTS", "UNIFIED_PROCESSOR_RETRY_ATTEMPTS"))
 
     # Auth Service
     auth_service_url: str = Field(alias="AUTH_SERVICE_URL")
-    auth_url: str = Field(validation_alias=AliasChoices("AUTH_URL", "AUTH_SERVICE_URL"), default="https://auth.confuse.site")
+    auth_url: str = Field(validation_alias=AliasChoices("AUTH_URL", "AUTH_SERVICE_URL"))
     internal_api_key: str = Field(alias="INTERNAL_API_KEY")
 
     # CORS
@@ -97,16 +97,13 @@ class Settings(BaseSettings):
     kafka_sasl_username: str | None = Field(default=None, alias="KAFKA_SASL_USERNAME")
     kafka_sasl_password: str | None = Field(default=None, alias="KAFKA_SASL_PASSWORD")
     kafka_ssl_ca_pem: str | None = Field(default=None, alias="KAFKA_SSL_CA_PEM")
-    kafka_enable_idempotence: bool = Field(alias="KAFKA_ENABLE_IDEMPOTENCE", default=True)
+    kafka_enable_idempotence: bool = Field(alias="KAFKA_ENABLE_IDEMPOTENCE")
 
-    # FalkorDB Configuration
-    falkordb_host: str = Field(
-        alias="FALKORDB_HOST",
-        default="r-6jissuruar.instance-ivah2xvml.hc-7up0crkyn.ap-south-1.aws.f2e0a955bb84.cloud",
-    )
-    falkordb_port: int = Field(alias="FALKORDB_PORT", default=50860)
-    falkordb_username: str | None = Field(alias="FALKORDB_USERNAME", default="adminconfuse")
-    falkordb_password: str | None = Field(default="graph4confuse", alias="FALKORDB_PASSWORD")
+    # FalkorDB Configuration (required — no hard-coded hosts/credentials)
+    falkordb_host: str = Field(alias="FALKORDB_HOST")
+    falkordb_port: int = Field(alias="FALKORDB_PORT")
+    falkordb_username: str = Field(alias="FALKORDB_USERNAME")
+    falkordb_password: str = Field(alias="FALKORDB_PASSWORD")
 
     class Config:
         env_file = [".map.env", ".secret.env", ".env.local"]
