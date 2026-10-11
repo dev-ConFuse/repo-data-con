@@ -492,7 +492,7 @@ DEBUG=false
 ENVIRONMENT=production
 
 # HTTP Service URLs
-AUTH_SERVICE_URL=https://auth-middleware-fcg0.onrender.com
+AUTH_SERVICE_URL=https://auth.confuse.site
 FEATURE_TOGGLE_SERVICE_URL=http://feature-toggle:3099
 
 

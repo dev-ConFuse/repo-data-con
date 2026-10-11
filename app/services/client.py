@@ -133,7 +133,7 @@ class ServiceClient:
 
     async def ensure_service_ready(self, service: str = "repo-uni-proc", max_wait_seconds: int = 60) -> bool:
         """
-        Wait for a downstream service to wake up (e.g. Render cold start) and be ready.
+        Wait for a downstream service to become ready.
 
         Args:
             service: Name of the downstream service
