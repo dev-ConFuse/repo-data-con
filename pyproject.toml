@@ -12,7 +12,8 @@ dependencies = [
     "httpx>=0.28.1",
     "structlog>=26.1.0",
     # gRPC removed: data-connector communicates with unified-processor via Kafka
-    "sqlalchemy>=2.0.51",
+    # [asyncio] extra required — pulls in greenlet for sqlalchemy.ext.asyncio
+    "sqlalchemy[asyncio]>=2.0.51",
     "asyncpg>=0.31.0",
     "PyGithub>=2.9.1",
     "python-gitlab>=8.4.0",
