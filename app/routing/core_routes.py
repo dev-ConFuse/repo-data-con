@@ -1,6 +1,6 @@
 """
-Data Connector Service - API Routes
-Merged from external_routes.py, internal_routes.py, and routes.py
+Repository Connector Service - API Routes
+Core endpoints: sources, jobs, ingestion, webhooks, file routing, and internal service-to-service calls.
 """
 
 import uuid
@@ -20,7 +20,7 @@ from app.models import (
     IngestRequest,
 )
 from app.infra.db.postgres import get_session, Repository
-from app.router import get_router
+from app.services.file_router import get_router
 from app.services import get_job_manager, get_service_client
 from app.config import get_settings
 from app.utils.validation import InputValidator, ValidationError

@@ -6,7 +6,7 @@ from sqlalchemy import select as sa_select
 from app.config import get_settings
 from app.infra.db.postgres import get_session, Repository
 from app.services.client import get_service_client
-from app.router import get_router
+from app.services.file_router import get_router
 from app.models import FileType
 
 logger = structlog.get_logger()
